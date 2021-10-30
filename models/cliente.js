@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Cliente.hasMany(models.Pedido,{
         foreignKey: 'ClienteId', as: 'pedidos'
-      })
+      });
     }
   };
   Cliente.init({

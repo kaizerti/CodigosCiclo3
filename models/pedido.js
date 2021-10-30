@@ -17,8 +17,9 @@ module.exports = (sequelize, DataTypes) => {
       Pedido.belongsToMany(models.Servico,{
         foreignKey: 'ServicoId', through: 'ItemPedido', as: 'servicos_ped'
       });
+      
       Pedido.hasMany(models.ItemPedido,{
-        foreignKey: 'PedidoId', as: 'item_pedidos'
+        foreignKey: 'PedidoId', as: 'item_pedido'
       });
     }
   };
