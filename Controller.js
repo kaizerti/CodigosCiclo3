@@ -119,6 +119,25 @@ app.get('/clientes.pedidos', async(req, res)=>{
 });
 })
 
+// exibir todos os pedidos de um cliente
+app.get('/cliente/:id/pedidos', async(req, res)=>{
+    await pedido.findAll ({
+        where: {ClienteId: req.params.id}
+    }).then(pedidos=>{
+        return res.json({
+            error: false,
+            pedidos
+        });
+    }).catch(error=>{
+        return res.status(400).json({
+            error: true,
+            message: "Erro: Não foi possível se conectar."
+        });
+    });
+});
+
+
+
 
 //alterar dados do pedido
 app.put('/cliente/:id/pedido', async(req, res)=>{
@@ -138,7 +157,7 @@ app.put('/cliente/:id/pedido', async(req, res)=>{
     };
     await pedido.update(ped,{
         where: Sequelize.and((ClienteId: (req, params, id),
-        (id: req, body, id)=>}
+        (id: req, body, id)=>{
         ).sthen(pedidos=>{
             return res.json({
                 error: false,
@@ -295,8 +314,8 @@ app.put('/atualizaservico', async(req, res)=>{
     });
 
 
-let port=process.env.PORT || 3001;
+    let port=process.env.PORT || 3001
 
-app.listen(port,(req,res)=>{
-    console.log=('Servidor ativo: http://localhost:3001');
-})
+    app.listen(port,(req,res)=>{
+        console.log('Servidor ativo: http://localhost:3001');
+    
